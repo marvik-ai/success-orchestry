@@ -1,0 +1,17 @@
+{
+  "semi": true,
+  "jsxSingleQuote": true,
+  "bracketSpacing": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "quoteProps": "consistent",
+  "overrides": [
+    {
+      "files": ["*.tsx"],
+      "options": {
+        "jsxSingleQuote": false
+      }
+    }
+  ]
+}
