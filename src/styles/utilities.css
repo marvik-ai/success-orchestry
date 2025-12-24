@@ -1,0 +1,6 @@
+@layer utilities {
+  .outline-ring\/50 {
+    outline: 2px solid rgba(156, 163, 175, 0.5);
+    outline-offset: 2px;
+  }
+}
