@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Outlet } from 'react-router-dom';
 
-import { Header } from '@/layout/components/Header';
-import { Sidebar } from '@/layout/components/Sidebar';
+import { Header } from '@/layout/Header';
+import { Sidebar } from '@/layout/Sidebar';
 import { cn } from '@/lib/utils';
 
 export const AppLayout = () => {

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { MenuItem } from '@/layout/components/MenuItem';
 import { navigationItems } from '@/layout/navigation';
+import { MenuItem } from '@/layout/Sidebar/components/MenuItem';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
