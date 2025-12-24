@@ -1,1 +1,1 @@
-export {};
+export { setThemeClass } from './theme';

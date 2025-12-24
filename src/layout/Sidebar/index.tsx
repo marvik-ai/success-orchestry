@@ -28,12 +28,13 @@ export const Sidebar: FC<SidebarProps> = ({
           'fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm lg:hidden',
           isMobileMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
+        data-testid="sidebar-overlay"
         onClick={handleCloseMobile}
         aria-hidden={!isMobileMenuOpen}
       />
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border/40 bg-card/95 shadow-sm transition-transform duration-200 lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r border-border/40 bg-background transition-transform duration-200 lg:translate-x-0',
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full',
           isCollapsed && 'lg:w-[72px]',
         )}
@@ -49,7 +50,7 @@ export const Sidebar: FC<SidebarProps> = ({
               isCollapsed ? 'lg:hidden' : 'lg:block',
             )}
           >
-            Backoffice
+            Success Orchestry
           </span>
         </div>
 

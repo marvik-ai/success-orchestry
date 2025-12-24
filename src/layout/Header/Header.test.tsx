@@ -3,6 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it, vi } from 'vitest';
 
+let setThemeMock = vi.fn();
+
+vi.mock('@/components/ThemeProvider/useTheme', () => ({
+  useTheme: () => ({ theme: 'light', setTheme: setThemeMock }),
+}));
+
 import { Header } from './index';
 
 describe('Header', () => {
@@ -76,5 +82,26 @@ describe('Header', () => {
     await userEvent.hover(screen.getByLabelText('Toggle sidebar'));
 
     expect(onToggleCollapse).not.toHaveBeenCalled();
+  });
+
+  it('toggles theme from the menu switch', async () => {
+    setThemeMock = vi.fn();
+    const user = userEvent.setup();
+
+    render(
+      <MemoryRouter initialEntries={['/dashboard']}>
+        <Header
+          isCollapsed={true}
+          onToggleCollapse={() => undefined}
+          onToggleMobileMenu={() => undefined}
+        />
+      </MemoryRouter>,
+    );
+
+    await user.click(screen.getByLabelText('User menu'));
+    const toggle = screen.getByRole('switch', { name: 'Dark mode' });
+    await user.click(toggle);
+
+    expect(setThemeMock).toHaveBeenCalledWith('dark');
   });
 });

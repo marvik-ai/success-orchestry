@@ -7,6 +7,8 @@ import { DashboardPage } from '@/pages/dashboard';
 import { EmployeesPage } from '@/pages/employees';
 import { NotFoundPage } from '@/pages/error';
 import { UsersPage } from '@/pages/users';
+import AuthenticatedRoute from '@/router/AuthenticatedRoute';
+import UnauthenticatedRoute from '@/router/UnauthenticatedRoute';
 
 import ROUTES from './routes';
 
@@ -21,18 +23,34 @@ const routesConfig: RouteObject[] = [
       },
       {
         path: ROUTES.LOGIN,
-        element: <LoginPage />,
+        element: (
+          <UnauthenticatedRoute>
+            <LoginPage />
+          </UnauthenticatedRoute>
+        ),
       },
       {
         path: ROUTES.FORGOT_PASSWORD,
-        element: <ForgotPasswordPage />,
+        element: (
+          <UnauthenticatedRoute>
+            <ForgotPasswordPage />
+          </UnauthenticatedRoute>
+        ),
       },
       {
         path: ROUTES.RESET_PASSWORD,
-        element: <ResetPasswordPage />,
+        element: (
+          <UnauthenticatedRoute>
+            <ResetPasswordPage />
+          </UnauthenticatedRoute>
+        ),
       },
       {
-        element: <AppLayout />,
+        element: (
+          <AuthenticatedRoute>
+            <AppLayout />
+          </AuthenticatedRoute>
+        ),
         children: [
           {
             path: ROUTES.DASHBOARD,

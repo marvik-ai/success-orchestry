@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "→ running: npm run test:coverage"
+npm run test:coverage || { echo "test:coverage failed — aborting push"; exit 1; }
+
+exit 0

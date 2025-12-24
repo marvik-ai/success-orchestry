@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
+import { useTheme } from '@/components/ThemeProvider/useTheme';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -20,6 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Switch } from '@/components/ui/switch';
 import { navigationItems } from '@/layout/navigation';
 import { cn } from '@/lib/utils';
 
@@ -32,6 +34,7 @@ type HeaderProps = {
 export const Header = ({ isCollapsed, onToggleCollapse, onToggleMobileMenu }: HeaderProps) => {
   const location = useLocation();
   const activeItem = navigationItems.find((item) => item.path === location.pathname);
+  const { theme, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border/40 bg-background/95 px-4 backdrop-blur lg:px-8">
@@ -73,7 +76,7 @@ export const Header = ({ isCollapsed, onToggleCollapse, onToggleMobileMenu }: He
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full">
+            <Button variant="ghost" size="icon" className="rounded-full" aria-label="User menu">
               <Avatar className="size-8">
                 <AvatarFallback>NS</AvatarFallback>
               </Avatar>
@@ -81,6 +84,15 @@ export const Header = ({ isCollapsed, onToggleCollapse, onToggleMobileMenu }: He
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="flex items-center justify-between gap-3">
+              <span className="text-sm">Dark mode</span>
+              <Switch
+                aria-label="Dark mode"
+                checked={theme === 'dark'}
+                onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+              />
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <User className="mr-2 size-4" />

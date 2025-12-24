@@ -17,7 +17,7 @@ describe('Sidebar', () => {
       </MemoryRouter>,
     );
 
-    expect(screen.getByText('Backoffice')).toBeInTheDocument();
+    expect(screen.getByText('Success Orchestry')).toBeInTheDocument();
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
     expect(screen.getByText('Users')).toBeInTheDocument();
   });
@@ -46,10 +46,8 @@ describe('Sidebar', () => {
     expect(onHoverStart).toHaveBeenCalledTimes(1);
     expect(onHoverEnd).toHaveBeenCalledTimes(1);
 
-    const overlay = screen.queryByLabelText('Close mobile menu');
-    if (overlay) {
-      await userEvent.click(overlay);
-    }
+    const overlay = screen.getByTestId('sidebar-overlay');
+    await userEvent.click(overlay);
 
     expect(onToggleMobileMenu).toHaveBeenCalledWith(false);
   });

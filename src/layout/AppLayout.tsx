@@ -32,7 +32,7 @@ export const AppLayout = () => {
   };
 
   return (
-    <div className="min-h-svh bg-muted/20 text-foreground">
+    <div className="min-h-svh bg-background text-foreground">
       <Sidebar
         isMobileMenuOpen={isMobileMenuOpen}
         isCollapsed={isSidebarCollapsed}
