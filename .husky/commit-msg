@@ -4,7 +4,7 @@ commit_msg_file="$1"
 msg="$(sed -n '1p' "$commit_msg_file" | tr -d '\r\n')"
 
 # Regex: ABC-123 feat|fix (opcional scope): descripción
-if printf '%s' "$msg" | grep -E -q '^[A-Z]+-[0-9]+\s(?:feat|fix)(?:\([^)]+\))?:\s.+$'; then
+if printf '%s' "$msg" | grep -E -q '^[A-Z]+-[0-9]+\s(feat|fix|chore|docs|refactor|test|style|perf|ci|build|revert)(\([^)]+\))?:\s.+$'; then
   exit 0
 fi
 
