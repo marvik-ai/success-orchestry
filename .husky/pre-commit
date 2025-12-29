@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "→ running: npm run lint:fix"
+npm run lint:fix || { echo "lint:fix failed — aborting commit"; exit 1; }
+
+echo "→ running: npm run lint"
+npm run lint || { echo "lint failed — aborting commit"; exit 1; }
+
+echo "→ running: prettier check"
+npx prettier --check . --loglevel warn || { echo "prettier check failed — aborting commit"; exit 1; }
+
+exit 0
