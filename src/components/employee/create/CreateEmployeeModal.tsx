@@ -62,7 +62,7 @@ export const CreateEmployeeModal: FC<Props> = ({ isOpen, onClose }) => {
         >
           {({ values, errors, touched, handleChange, handleBlur }) => (
             <Form className="flex max-h-[calc(90vh-120px)] flex-col">
-              <div className="flex-1 space-y-6 overflow-y-auto p-6 pt-2 scrollbar-thin">
+              <div className="scrollbar-thin flex-1 space-y-6 overflow-y-auto p-6 pt-2">
                 {/* Sección: Identificación Laboral */}
                 <div className="space-y-3">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground/80">
