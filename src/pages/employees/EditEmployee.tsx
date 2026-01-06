@@ -20,34 +20,32 @@ export const EditEmployeePage: FC = () => {
       return;
     }
 
-    // TODO: Replace with actual API call when employeesApi is ready
-    // For now, simulate loading and use placeholder data
     const fetchEmployee = async () => {
       setIsLoading(true);
       try {
-        // Simulate API call
+        // Simulate API call delay
         await new Promise((resolve) => setTimeout(resolve, 500));
 
-        // Placeholder data - replace with actual API call
-        // const response = await getEmployee(id).unwrap();
-        // setEmployeeData(response);
-
-        // Temporary placeholder for testing
+        // --- DUMMY DATA START ---
         setEmployeeData({
           id,
-          first_name: '',
-          last_name: '',
-          document_number: '',
-          tax_id: '',
-          gender: '',
-          education_level: '',
-          personal_email: '',
-          phone: '',
-          photo: null,
-          city: '',
-          country_id: '',
-          address: '',
+          first_name: 'Jane',
+          last_name: 'Doe',
+          document_number: 'A-12345678',
+          salary: 85000,
+          tax_id: 'TX-987654',
+          seniority: 'Senior',
+          status: 'Active',
+          gender: 'female',
+          education_level: "Bachelor's Degree",
+          personal_email: 'jane.doe@company.com',
+          phone: '+1 (555) 012-3456',
+          photo: '',
+          city: 'New York',
+          country_id: 'US',
+          address: '123 Maple Avenue, Suite 400',
         });
+        // --- DUMMY DATA END ---
       } catch (error) {
         console.error('Failed to fetch employee:', error);
         navigate('/employees');
