@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { EmployeeForm } from '@/components/employee/EmployeeForm';
 import { Button } from '@/components/ui/button';
-import { EmployeeForm } from '@/pages/employees/components/EmployeeForm';
 import { EmployeeCreation, EmployeeUpdate } from '@/types';
 
 export const EditEmployeePage: FC = () => {
