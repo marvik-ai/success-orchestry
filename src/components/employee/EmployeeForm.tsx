@@ -50,6 +50,16 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const action = isEditMode ? 'update' : 'create';
+    const isConfirmed = window.confirm(
+      `Are you sure you want to ${action} this employee?`
+    );
+
+    if (!isConfirmed) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
