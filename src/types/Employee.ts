@@ -3,7 +3,10 @@ export interface EmployeeCreation {
   first_name: string;
   last_name: string;
   document_number: string;
+  salary: number;
   tax_id: string;
+  seniority: string;
+  status: string;
   gender: string;
   education_level: string;
   personal_email: string;
@@ -21,7 +24,10 @@ export interface EmployeeUpdate {
   first_name: string;
   last_name: string;
   document_number: string;
+  salary: number;
   tax_id: string;
+  seniority: string;
+  status: string;
   gender: string;
   education_level: string;
   personal_email: string;

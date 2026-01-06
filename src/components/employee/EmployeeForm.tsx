@@ -24,7 +24,10 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     first_name: initialData?.first_name || '',
     last_name: initialData?.last_name || '',
     document_number: initialData?.document_number || '',
+    salary: initialData?.salary || '',
     tax_id: initialData?.tax_id || '',
+    seniority: initialData?.seniority || '',
+    status: initialData?.status || '',
     gender: initialData?.gender || '',
     education_level: initialData?.education_level || '',
     personal_email: initialData?.personal_email || '',
@@ -100,13 +103,13 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="document_number">
-            Document Number <span className="text-destructive">*</span>
+          <Label htmlFor="salary">
+            Salary <span className="text-destructive">*</span>
           </Label>
           <Input
-            id="document_number"
-            name="document_number"
-            value={formData.document_number}
+            id="salary"
+            name="salary"
+            value={formData.salary}
             onChange={handleChange}
             required
             disabled={isSubmitting}
@@ -121,6 +124,36 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             id="tax_id"
             name="tax_id"
             value={formData.tax_id}
+            onChange={handleChange}
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="seniority">
+            Seniority <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="seniority"
+            name="seniority"
+            value={formData.seniority}
+            onChange={handleChange}
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="status">
+            Status <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="status"
+            name="status"
+            value={formData.status}
             onChange={handleChange}
             required
             disabled={isSubmitting}
@@ -164,19 +197,35 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
         </div>
       </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="personal_email">
-          Personal Email <span className="text-destructive">*</span>
-        </Label>
-        <Input
-          id="personal_email"
-          name="personal_email"
-          type="email"
-          value={formData.personal_email}
-          onChange={handleChange}
-          required
-          disabled={isSubmitting}
-        />
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="personal_email">
+            Personal Email <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="personal_email"
+            name="personal_email"
+            type="email"
+            value={formData.personal_email}
+            onChange={handleChange}
+            required
+            disabled={isSubmitting}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="document_number">
+            Document Number <span className="text-destructive">*</span>
+          </Label>
+          <Input
+            id="document_number"
+            name="document_number"
+            value={formData.document_number}
+            onChange={handleChange}
+            required
+            disabled={isSubmitting}
+          />
+        </div>
       </div>
 
       <div className="space-y-2">
