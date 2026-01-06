@@ -38,7 +38,46 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     address: initialData?.address || '',
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    // Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.personal_email)) {
+      newErrors.personal_email = 'Invalid email address';
+    }
+
+    // Phone
+    const phoneRegex = /^\+?[\d\s-]{10,}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      newErrors.phone = 'Invalid phone number (min 10 digits)';
+    }
+
+    // Salary
+    if (isNaN(Number(formData.salary)) || Number(formData.salary) <= 0) {
+      newErrors.salary = 'Salary must be a positive number';
+    }
+
+    // Photo URL
+    if (formData.photo) {
+      try {
+        new URL(formData.photo);
+      } catch {
+        newErrors.photo = 'Must be a valid URL';
+      }
+    }
+
+    // Gender
+    if (!formData.gender) {
+      newErrors.gender = 'Gender is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -46,17 +85,22 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       ...prev,
       [name]: value === '' ? null : value,
     }));
+
+    // Clear error for this field when user types
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!validateForm()) return;
+
     const action = isEditMode ? 'update' : 'create';
     const isConfirmed = window.confirm(`Are you sure you want to ${action} this employee?`);
 
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     setIsSubmitting(true);
 
@@ -76,6 +120,10 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       setIsSubmitting(false);
     }
   };
+
+  // Helper function to render error message
+  const renderError = (field: string) =>
+    errors[field] && <p className="mt-1 text-sm text-destructive">{errors[field]}</p>;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -121,7 +169,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             onChange={handleChange}
             required
             disabled={isSubmitting}
+            className={errors.salary ? 'border-red-500' : ''}
           />
+          {renderError('salary')}
         </div>
 
         <div className="space-y-2">
@@ -181,13 +231,16 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             onChange={handleChange}
             required
             disabled={isSubmitting}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+            className={`flex h-10 w-full rounded-md border bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ${
+              errors.gender ? 'border-red-500' : 'border-input'
+            }`}
           >
             <option value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
+          {renderError('gender')}
         </div>
 
         <div className="space-y-2">
@@ -218,7 +271,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             onChange={handleChange}
             required
             disabled={isSubmitting}
+            className={errors.personal_email ? 'border-red-500' : ''}
           />
+          {renderError('personal_email')}
         </div>
 
         <div className="space-y-2">
@@ -248,7 +303,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           onChange={handleChange}
           required
           disabled={isSubmitting}
+          className={errors.phone ? 'border-red-500' : ''}
         />
+        {renderError('phone')}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
@@ -265,7 +322,6 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             disabled={isSubmitting}
           />
         </div>
-
         <div className="space-y-2">
           <Label htmlFor="country_id">
             Country ID <span className="text-destructive">*</span>
@@ -305,7 +361,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           onChange={handleChange}
           disabled={isSubmitting}
           placeholder="https://example.com/photo.jpg"
+          className={errors.photo ? 'border-red-500' : ''}
         />
+        {renderError('photo')}
       </div>
 
       <div className="flex justify-end gap-2 pt-4">
