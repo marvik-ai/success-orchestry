@@ -52,9 +52,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     e.preventDefault();
 
     const action = isEditMode ? 'update' : 'create';
-    const isConfirmed = window.confirm(
-      `Are you sure you want to ${action} this employee?`
-    );
+    const isConfirmed = window.confirm(`Are you sure you want to ${action} this employee?`);
 
     if (!isConfirmed) {
       return;
