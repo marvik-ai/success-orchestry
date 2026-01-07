@@ -56,7 +56,7 @@ export function EmployeeModal({ employeeId, initialData, trigger }: EmployeeModa
           <DialogTitle>{isEditMode ? 'Edit Employee' : 'Create New Employee'}</DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Edit employee details with updated information."
+              ? 'Edit employee details with updated information.'
               : 'Fill in the details below to register a new employee.'}
           </DialogDescription>
         </DialogHeader>
