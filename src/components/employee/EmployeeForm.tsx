@@ -1,14 +1,15 @@
-import { useFormik } from 'formik';
 import { FC, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { useFormik } from 'formik';
+
 import {
   editEmployeeSimpleSchema,
   EmployeeFormValues,
   initialEditEmployeeValues,
 } from '@/components/employee/edit/EmployeeForm.schema';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 interface EmployeeFormProps {
   employeeId?: string;
@@ -33,7 +34,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
       salary: initialData?.salary ? Number(initialData.salary) : initialEditEmployeeValues.salary,
     },
     // Connecting Yup Schema here
-    validationSchema: editEmployeeSimpleSchema, 
+    validationSchema: editEmployeeSimpleSchema,
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: async (values) => {
@@ -187,9 +188,9 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
             }`}
           >
             <option value="">Select gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
           </select>
           {showError('gender')}
         </div>
