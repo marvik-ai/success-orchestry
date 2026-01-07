@@ -2,16 +2,15 @@ import { FC, useEffect, useState } from 'react';
 
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { EmployeeFormValues } from '@/components/employee/edit/EmployeeForm.schema';
 import { EmployeeForm } from '@/components/employee/EmployeeForm';
 import { Button } from '@/components/ui/button';
-import { EmployeeCreation, EmployeeUpdate } from '@/types';
 
 export const EditEmployeePage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [employeeData, setEmployeeData] = useState<Partial<
-    EmployeeCreation | EmployeeUpdate
-  > | null>(null);
+
+  const [employeeData, setEmployeeData] = useState<Partial<EmployeeFormValues> | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,12 +22,9 @@ export const EditEmployeePage: FC = () => {
     const fetchEmployee = async () => {
       setIsLoading(true);
       try {
-        // Simulate API call delay
         await new Promise((resolve) => setTimeout(resolve, 500));
 
-        // --- DUMMY DATA START ---
         setEmployeeData({
-          id,
           first_name: 'Jane',
           last_name: 'Doe',
           document_number: 'A-12345678',
@@ -39,13 +35,12 @@ export const EditEmployeePage: FC = () => {
           gender: 'female',
           education_level: "Bachelor's Degree",
           personal_email: 'jane.doe@company.com',
-          phone: '+1 (555) 012-3456',
+          phone: '+1 555-012-3456',
           photo: '',
           city: 'New York',
           country_id: 'US',
           address: '123 Maple Avenue, Suite 400',
         });
-        // --- DUMMY DATA END ---
       } catch (error) {
         console.error('Failed to fetch employee:', error);
         navigate('/employees');
@@ -57,11 +52,16 @@ export const EditEmployeePage: FC = () => {
     fetchEmployee();
   }, [id, navigate]);
 
-  const handleSuccess = () => {
+  const handleCancel = () => {
     navigate('/employees');
   };
 
-  const handleCancel = () => {
+  const handleSave = async (values: EmployeeFormValues) => {
+    console.log('Updating Employee ID:', id);
+    console.log('Data:', values);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     navigate('/employees');
   };
 
@@ -94,12 +94,7 @@ export const EditEmployeePage: FC = () => {
       </div>
 
       <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
-        <EmployeeForm
-          employeeId={id}
-          initialData={employeeData}
-          onSuccess={handleSuccess}
-          onCancel={handleCancel}
-        />
+        <EmployeeForm initialData={employeeData} onSubmit={handleSave} onCancel={handleCancel} />
       </div>
     </div>
   );
