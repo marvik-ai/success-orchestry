@@ -1,4 +1,5 @@
 import { FC } from 'react';
+
 import { useFormik } from 'formik';
 
 import {
@@ -12,15 +13,11 @@ import { Label } from '@/components/ui/label';
 
 interface EmployeeFormProps {
   initialData?: Partial<EmployeeFormValues>;
-  onSubmit: (values: EmployeeFormValues) => Promise<void>; 
+  onSubmit: (values: EmployeeFormValues) => Promise<void>;
   onCancel?: () => void;
 }
 
-export const EmployeeForm: FC<EmployeeFormProps> = ({
-  initialData,
-  onSubmit,
-  onCancel,
-}) => {
+export const EmployeeForm: FC<EmployeeFormProps> = ({ initialData, onSubmit, onCancel }) => {
   const formik = useFormik<EmployeeFormValues>({
     initialValues: {
       ...initialEditEmployeeValues,
@@ -31,14 +28,14 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
     validateOnBlur: true,
     validateOnChange: true,
     onSubmit: async (values) => {
-        const isConfirmed = window.confirm('Are you sure you want to save?');
-        if (!isConfirmed) return;
+      const isConfirmed = window.confirm('Are you sure you want to save?');
+      if (!isConfirmed) return;
 
-        try {
-            await onSubmit(values);
-        } catch (error) {
-            console.error(error);
-        }
+      try {
+        await onSubmit(values);
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
