@@ -324,7 +324,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           disabled={isSubmitting}
-          placeholder="https://example.com/photo.jpg"
+          placeholder="Use link for photos: https://example.com/photo.jpg"
           className={getInputClass('photo')}
         />
         {showError('photo')}
