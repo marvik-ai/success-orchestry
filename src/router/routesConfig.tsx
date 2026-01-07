@@ -4,7 +4,7 @@ import App from '@/App';
 import { AppLayout } from '@/layout';
 import { ForgotPasswordPage, LoginPage, ResetPasswordPage } from '@/pages/auth';
 import { DashboardPage } from '@/pages/dashboard';
-import { EditEmployeePage, EmployeesPage } from '@/pages/employees';
+import { EmployeesPage } from '@/pages/employees';
 import { NotFoundPage } from '@/pages/error';
 import { UsersPage } from '@/pages/users';
 import AuthenticatedRoute from '@/router/AuthenticatedRoute';
@@ -63,10 +63,6 @@ const routesConfig: RouteObject[] = [
           {
             path: ROUTES.EMPLOYEES,
             element: <EmployeesPage />,
-          },
-          {
-            path: ROUTES.EDIT_EMPLOYEE,
-            element: <EditEmployeePage />,
           },
         ],
       },
