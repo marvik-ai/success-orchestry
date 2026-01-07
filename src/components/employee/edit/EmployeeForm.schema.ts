@@ -35,7 +35,7 @@ export const initialEditEmployeeValues: EmployeeFormValues = {
   gender: 'female',
   education_level: "Bachelor's Degree",
   personal_email: 'jane.doe@company.com',
-  phone: '+1 (555) 012-3456',
+  phone: '+1 555-012-3456',
   photo: '',
   city: 'New York',
   country_id: 'US',

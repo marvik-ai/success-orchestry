@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { Plus, Pencil } from 'lucide-react'; // Icons
+import { Plus, Pencil } from 'lucide-react';
 
 import { EmployeeFormValues } from '@/components/employee/edit/EmployeeForm.schema';
-import { EmployeeForm } from '@/components/employee/EmployeeForm'; // Import your existing form
+import { EmployeeForm } from '@/components/employee/EmployeeForm';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -17,18 +17,34 @@ import {
 interface EmployeeModalProps {
   employeeId?: string;
   initialData?: Partial<EmployeeFormValues>;
-  trigger?: React.ReactNode; // Optional: Custom button if you want
+  trigger?: React.ReactNode;
 }
 
 export function EmployeeModal({ employeeId, initialData, trigger }: EmployeeModalProps) {
   const [open, setOpen] = useState(false);
   const isEditMode = !!employeeId;
 
-  const handleSuccess = () => {
-    // 1. Close the modal
-    setOpen(false);
-    // 2. Ideally trigger a data refresh here (e.g., invalidate queries if using React Query)
-    console.log('Refetching data...');
+  // This function now holds the logic that used to be in the Form
+  const handleSave = async (values: EmployeeFormValues) => {
+    try {
+      if (isEditMode) {
+        console.log(`Updating employee ${employeeId} with data:`, values);
+        // await api.updateEmployee(employeeId, values);
+      } else {
+        console.log('Creating new employee with data:', values);
+        // await api.createEmployee(values);
+      }
+
+      // Simulate API delay (delete when api connected)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Close modal and refresh
+      setOpen(false);
+      console.log('Refetching data...');
+    } catch (error) {
+      console.error('Error saving employee:', error);
+      // You can add toast notifications here on error
+    }
   };
 
   return (
@@ -37,7 +53,6 @@ export function EmployeeModal({ employeeId, initialData, trigger }: EmployeeModa
         {trigger ? (
           trigger
         ) : (
-          // Default buttons based on mode
           <Button variant={isEditMode ? 'ghost' : 'default'} size={isEditMode ? 'icon' : 'default'}>
             {isEditMode ? (
               <Pencil className="size-4" />
@@ -50,7 +65,6 @@ export function EmployeeModal({ employeeId, initialData, trigger }: EmployeeModa
         )}
       </DialogTrigger>
 
-      {/* max-h-[90vh] and overflow-y-auto handle scrolling if the form is too tall */}
       <DialogContent className="max-h-[90vh] w-full max-w-4xl overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{isEditMode ? 'Edit Employee' : 'Create New Employee'}</DialogTitle>
@@ -62,10 +76,9 @@ export function EmployeeModal({ employeeId, initialData, trigger }: EmployeeModa
         </DialogHeader>
 
         <EmployeeForm
-          employeeId={employeeId}
           initialData={initialData}
-          onSuccess={handleSuccess}
-          onCancel={() => setOpen(false)} // Closes modal when "Cancel" is clicked inside form
+          onSubmit={handleSave}
+          onCancel={() => setOpen(false)}
         />
       </DialogContent>
     </Dialog>
