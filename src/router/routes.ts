@@ -6,7 +6,6 @@ const ROUTES = {
   DASHBOARD: '/dashboard',
   USERS: '/users',
   EMPLOYEES: '/employees',
-  EDIT_EMPLOYEE: '/employees/:id/edit',
   ERROR_404: '/404',
   ERROR_500: '/500',
   BASE: '/',
