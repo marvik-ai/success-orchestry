@@ -2,7 +2,7 @@ name: Frontend CI
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   lint-test-build:
@@ -36,5 +36,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
-          path: dist/ 
+          path: dist/
           retention-days: 5
