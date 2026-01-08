@@ -25,4 +25,14 @@
       'Segoe UI',
       sans-serif;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    /* Hack: Use a massive inner shadow to cover the browser's background color */
+    -webkit-box-shadow: 0 0 0px 1000px hsl(var(--background)) inset;
+
+    /* Change the text color to match your theme */
+    -webkit-text-fill-color: hsl(var(--foreground));
+  }
 }
